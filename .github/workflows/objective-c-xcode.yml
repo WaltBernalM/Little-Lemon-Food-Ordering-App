@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Change Directory to LittleLemonApp
-        run: cd LittleLemonApp
+        run: cd LittleLemonApp/LittleLemonApp.xcodeproj
 
       - name: Set Default Scheme
         run: |
