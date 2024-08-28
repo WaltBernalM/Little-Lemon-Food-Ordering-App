@@ -27,7 +27,7 @@ jobs:
       - name: Build and Analyze
         run: |
           project_path="../LittleLemonApp.xcodeproj"
-          if [ -d "$project_path" ]; then
+          if [ -f "$project_path" ]; then
             xcodebuild clean build analyze -project "$project_path" -scheme "LittleLemonApp" | xcpretty && exit ${PIPESTATUS[0]}
           else
             echo "Project file not found: $project_path"
