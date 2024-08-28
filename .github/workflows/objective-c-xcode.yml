@@ -15,13 +15,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Change Directory to LittleLemonApp
-        run: cd LittleLemonApp
+      - name: List Root Directory Contents for Debugging
+        run: ls -R
 
-      - name: List Directory Contents Inside LittleLemonApp
+      - name: Change Directory to LittleLemonApp/LittleLemonApp
+        run: cd LittleLemonApp/LittleLemonApp
+
+      - name: List Directory Contents Inside LittleLemonApp/LittleLemonApp for Debugging
         run: ls -R
 
       - name: Build and Analyze
         run: |
-          project_path="LittleLemonApp.xcodeproj"
-          xcodebuild clean build analyze -project "$project_path" -scheme "LittleLemonApp" | xcpretty && exit ${PIPESTATUS[0]}
+          project_path="../LittleLemonApp.xcodeproj"
+          if [ -d "$project_path" ]; then
+            xcodebuild clean build analyze -project "$project_path" -scheme "LittleLemonApp" | xcpretty && exit ${PIPESTATUS[0]}
+          else
+            echo "Project file not found: $project_path"
+            exit 1
+          fi
